@@ -3,7 +3,6 @@
   "description": "General interfaces and handlers for a Task Queue.",
   "type": "library",
   "license": "MIT",
-  "version": "0.0.1",
   "authors": [
     {
       "name": "Dmitriy Krivopalov",
