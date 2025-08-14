@@ -4,7 +4,6 @@
     <rule ref="PSR12"/>
 
     <file>src</file>
-    <file>tests</file>
 
     <!-- Show progression -->
     <arg name="basepath" value="."/>
