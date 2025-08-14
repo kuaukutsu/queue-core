@@ -15,7 +15,6 @@ use kuaukutsu\queue\core\QueueTask;
 
 /**
  * @see https://github.com/spiral/framework/blob/master/src/Interceptors/src/Handler/InterceptorPipeline.php
- * @psalm-internal kuaukutsu\queue\core
  */
 final class Pipeline implements HandlerInterface
 {

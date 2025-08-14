@@ -3,7 +3,6 @@
   "description": "General interfaces and handlers for a Task Queue.",
   "type": "library",
   "license": "MIT",
-  "version": "0.0.1",
   "authors": [
     {
       "name": "Dmitriy Krivopalov",
@@ -29,12 +28,6 @@
     "squizlabs/php_codesniffer": "^3.7",
     "vimeo/psalm": "^6.13"
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "kuaukutsu\\queue\\core\\": "src"
@@ -43,10 +36,7 @@
   "autoload-dev": {
     "psr-4": {
       "kuaukutsu\\queue\\core\\tests\\": "tests"
-    },
-    "files": [
-      "tests/functions.php"
-    ]
+    }
   },
   "config": {
     "platform": {
