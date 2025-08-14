@@ -10,7 +10,7 @@ use kuaukutsu\queue\core\exception\QueueConsumeException;
 /**
  * @api
  */
-interface QueueConsumer
+interface ConsumerInterface
 {
     /**
      * @param ?callable(string, Throwable): void $catch

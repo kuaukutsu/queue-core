@@ -9,7 +9,7 @@ use kuaukutsu\queue\core\exception\QueuePublishException;
 /**
  * @api
  */
-interface QueuePublisher
+interface PublisherInterface
 {
     /**
      * @throws QueuePublishException
