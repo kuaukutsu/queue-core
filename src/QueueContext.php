@@ -14,7 +14,7 @@ final readonly class QueueContext implements Serializable
     /**
      * @param non-negative-int $attempt
      * @param non-empty-string $routingKey
-     * @param array<non-empty-string, scalar|array|Serializable> $external Внешние атрибуты.
+     * @param array<non-empty-string, mixed> $external Внешние атрибуты.
      *                             Например, requestId или спеуцифичные для метрик атрибуты.
      */
     private function __construct(
@@ -36,7 +36,7 @@ final readonly class QueueContext implements Serializable
     }
 
     /**
-     * @param array<non-empty-string, scalar|array|Serializable> $external
+     * @param array<non-empty-string, mixed> $external
      */
     public function withExternal(array $external): self
     {
@@ -73,7 +73,7 @@ final readonly class QueueContext implements Serializable
      *     "attempt": non-negative-int,
      *     "routingKey": non-empty-string,
      *     "createdAt": non-empty-string,
-     *     "external": array<non-empty-string, scalar|array|Serializable>,
+     *     "external": array<non-empty-string, mixed>,
      * } $data
      */
     public function __unserialize(array $data): void

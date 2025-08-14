@@ -13,7 +13,7 @@ use kuaukutsu\queue\core\exception\QueueConsumeException;
 interface ConsumerInterface
 {
     /**
-     * @param ?callable(string, Throwable): void $catch
+     * @param ?callable(string|null, Throwable): void $catch
      * @throws QueueConsumeException
      */
     public function consume(SchemaInterface $schema, ?callable $catch = null): void;

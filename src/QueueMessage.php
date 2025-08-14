@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace kuaukutsu\queue\core;
 
-use LogicException;
+use InvalidArgumentException;
 
 final readonly class QueueMessage
 {
@@ -31,10 +31,16 @@ final readonly class QueueMessage
     }
 
     /**
-     * @throws LogicException if Message violates protocol
+     * @throws InvalidArgumentException if Message violates protocol
      */
     public static function makeFromMessage(string $message): self
     {
+        if (str_starts_with($message, 'a:2') === false) {
+            throw new InvalidArgumentException(
+                'Message must contain an array of two elements: QueueTask and QueueContext.'
+            );
+        }
+
         $container = unserialize(
             $message,
             [
@@ -50,6 +56,6 @@ final readonly class QueueMessage
             return new self($container[0], $container[1]);
         }
 
-        throw new LogicException('Message must contain QueueTask and QueueContext.');
+        throw new InvalidArgumentException('Message must contain QueueTask and QueueContext.');
     }
 }

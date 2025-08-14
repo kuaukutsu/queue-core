@@ -8,6 +8,9 @@ use LogicException;
 
 final class UnsupportedException extends LogicException
 {
+    /**
+     * @param non-empty-string $message
+     */
     public function __construct(string $message = 'Unsupported operation.')
     {
         parent::__construct($message);
