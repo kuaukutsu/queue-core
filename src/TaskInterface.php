@@ -6,6 +6,9 @@ namespace kuaukutsu\queue\core;
 
 use Throwable;
 
+/**
+ * Deferred Task.
+ */
 interface TaskInterface
 {
     /**
