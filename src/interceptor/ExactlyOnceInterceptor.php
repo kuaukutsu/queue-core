@@ -16,7 +16,7 @@ use kuaukutsu\queue\core\handler\HandlerInterface;
 final readonly class ExactlyOnceInterceptor implements InterceptorInterface
 {
     /**
-     * @param int $ttl Time in seconds. Default 10 min.
+     * @param non-negative-int $ttl Time in seconds. Default 10 min.
      */
     public function __construct(
         private Cache $cache,

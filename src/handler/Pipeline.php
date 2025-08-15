@@ -23,6 +23,9 @@ final class Pipeline implements HandlerInterface
      */
     private array $interceptors = [];
 
+    /**
+     * @var non-negative-int
+     */
     private int $position = 0;
 
     public function __construct(
