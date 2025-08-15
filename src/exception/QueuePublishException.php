@@ -7,16 +7,14 @@ namespace kuaukutsu\queue\core\exception;
 use Throwable;
 use RuntimeException;
 use kuaukutsu\queue\core\SchemaInterface;
-use kuaukutsu\queue\core\QueueTask;
 
 final class QueuePublishException extends RuntimeException
 {
-    public function __construct(QueueTask $task, SchemaInterface $schema, Throwable $previous)
+    public function __construct(SchemaInterface $schema, Throwable $previous)
     {
         parent::__construct(
             sprintf(
-                '[%s] Task push to [%s] queue is failed: %s',
-                $task->target,
+                'Task push to [%s] queue is failed: %s',
                 $schema->getRoutingKey(),
                 $previous->getMessage()
             ),
