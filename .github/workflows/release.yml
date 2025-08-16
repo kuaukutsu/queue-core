@@ -21,16 +21,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          coverage: none
+          extensions: curl
         env:
-          fail-fast: true
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install composer dependencies
         uses: ramsey/composer-install@v3
         with:
           dependency-versions: "highest"
-          composer-options: --optimize-autoloader
+          composer-options: --no-progress --optimize-autoloader
 
       - name: Psalm Type Coverage
         run: vendor/bin/psalm --stats --output-format=github --shepherd
