@@ -8,6 +8,9 @@ use Serializable;
 use Ramsey\Uuid\Uuid;
 use kuaukutsu\queue\core\internal\SerializableDeprecated;
 
+/**
+ * @api
+ */
 final readonly class QueueTask implements Serializable
 {
     use SerializableDeprecated;
