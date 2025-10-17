@@ -22,12 +22,11 @@ final readonly class QueueMessageBinary
 
     /**
      * @return non-empty-string
-     * @noinspection PhpDocMissingThrowsInspection
+     * @throws IgbinaryException if igbinary ext not loaded
      */
     public static function makeMessage(QueueTask $task, QueueContext $context): string
     {
         if (extension_loaded('igbinary') === false) {
-            /** @noinspection PhpUnhandledExceptionInspection */
             throw new IgbinaryException();
         }
 
@@ -44,12 +43,11 @@ final readonly class QueueMessageBinary
 
     /**
      * @throws InvalidArgumentException if Message violates protocol
-     * @noinspection PhpDocMissingThrowsInspection
+     * @throws IgbinaryException if igbinary ext not loaded
      */
     public static function makeFromMessage(string $message): self
     {
         if (extension_loaded('igbinary') === false) {
-            /** @noinspection PhpUnhandledExceptionInspection */
             throw new IgbinaryException();
         }
 
