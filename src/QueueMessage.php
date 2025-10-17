@@ -22,6 +22,18 @@ final readonly class QueueMessage
      */
     public static function makeMessage(QueueTask $task, QueueContext $context): string
     {
+        if (extension_loaded('igbinary')) {
+            /**
+             * @var non-empty-string
+             */
+            return igbinary_serialize(
+                [
+                    $task,
+                    $context,
+                ]
+            );
+        }
+
         /**
          * @var non-empty-string
          */
@@ -38,18 +50,22 @@ final readonly class QueueMessage
      */
     public static function makeFromMessage(string $message): self
     {
-        if (str_starts_with($message, 'a:2') === false) {
-            throw new InvalidArgumentException(
-                'Message must contain an array of two elements: QueueTask and QueueContext.'
+        if (extension_loaded('igbinary')) {
+            $container = igbinary_unserialize($message);
+        } else {
+            if (str_starts_with($message, 'a:2') === false) {
+                throw new InvalidArgumentException(
+                    'Message must contain an array of two elements: QueueTask and QueueContext.'
+                );
+            }
+
+            $container = unserialize(
+                $message,
+                [
+                    'allowed_classes' => true,
+                ]
             );
         }
-
-        $container = unserialize(
-            $message,
-            [
-                'allowed_classes' => true,
-            ]
-        );
 
         if (
             is_array($container) && isset($container[0], $container[1])
