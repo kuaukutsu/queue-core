@@ -1,15 +1,18 @@
 <?php
 
+/** @noinspection PhpComposerExtensionStubsInspection extension_loaded('igbinary') */
+
 declare(strict_types=1);
 
 namespace kuaukutsu\queue\core;
 
 use InvalidArgumentException;
+use kuaukutsu\queue\core\exception\IgbinaryException;
 
 /**
  * @api
  */
-final readonly class QueueMessage
+final readonly class QueueMessageBinary
 {
     public function __construct(
         public QueueTask $task,
@@ -19,13 +22,19 @@ final readonly class QueueMessage
 
     /**
      * @return non-empty-string
+     * @noinspection PhpDocMissingThrowsInspection
      */
     public static function makeMessage(QueueTask $task, QueueContext $context): string
     {
+        if (extension_loaded('igbinary') === false) {
+            /** @noinspection PhpUnhandledExceptionInspection */
+            throw new IgbinaryException();
+        }
+
         /**
          * @var non-empty-string
          */
-        return serialize(
+        return igbinary_serialize(
             [
                 $task,
                 $context,
@@ -35,22 +44,16 @@ final readonly class QueueMessage
 
     /**
      * @throws InvalidArgumentException if Message violates protocol
+     * @noinspection PhpDocMissingThrowsInspection
      */
     public static function makeFromMessage(string $message): self
     {
-        if (str_starts_with($message, 'a:2') === false) {
-            throw new InvalidArgumentException(
-                'Message must contain an array of two elements: QueueTask and QueueContext.'
-            );
+        if (extension_loaded('igbinary') === false) {
+            /** @noinspection PhpUnhandledExceptionInspection */
+            throw new IgbinaryException();
         }
 
-        $container = unserialize(
-            $message,
-            [
-                'allowed_classes' => true,
-            ]
-        );
-
+        $container = igbinary_unserialize($message);
         if (
             is_array($container) && isset($container[0], $container[1])
             && $container[0] instanceof QueueTask

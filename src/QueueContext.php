@@ -7,6 +7,9 @@ namespace kuaukutsu\queue\core;
 use Serializable;
 use kuaukutsu\queue\core\internal\SerializableDeprecated;
 
+/**
+ * @api
+ */
 final readonly class QueueContext implements Serializable
 {
     use SerializableDeprecated;
