@@ -15,8 +15,8 @@ final readonly class QueueContext implements Serializable
     use SerializableDeprecated;
 
     /**
-     * @param non-negative-int $attempt
-     * @param non-empty-string $routingKey
+     * @param non-negative-int $attempt Номер попытки, может использоваться при ретраях.
+     * @param non-empty-string $routingKey Наименование канала.
      * @param array<non-empty-string, mixed> $external Внешние атрибуты.
      *                             Например, requestId или спеуцифичные для метрик атрибуты.
      */
@@ -24,7 +24,7 @@ final readonly class QueueContext implements Serializable
         public int $attempt,
         public string $routingKey,
         public string $createdAt,
-        public array $external = [],
+        public array $external,
     ) {
     }
 
