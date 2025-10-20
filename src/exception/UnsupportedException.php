@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace kuaukutsu\queue\core\exception;
 
-use LogicException;
+use Error;
 
-final class UnsupportedException extends LogicException
+final class UnsupportedException extends Error
 {
     /**
      * @param non-empty-string $message
