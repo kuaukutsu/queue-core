@@ -53,6 +53,11 @@ phpcbf: ## php code sniffer: automatically correct
 		ghcr.io/kuaukutsu/php:${PHP_VERSION}-cli \
 		./vendor/bin/phpcbf
 
+phpunit: ## phpunit
+	docker run --init -it --rm -u ${USER} -v "$$(pwd):/app" -w /app \
+		ghcr.io/kuaukutsu/php:${PHP_VERSION}-cli \
+		./vendor/bin/phpunit
+
 rector: ## rector
 	docker run --init -it --rm -u ${USER} -v "$$(pwd):/app" -w /app \
 		ghcr.io/kuaukutsu/php:${PHP_VERSION}-cli \
