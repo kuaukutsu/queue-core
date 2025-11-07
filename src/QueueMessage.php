@@ -50,7 +50,8 @@ final readonly class QueueMessage
      */
     public static function makeFromMessage(string $message): self
     {
-        if ($message === 'b:0;'
+        if (
+            $message === 'b:0;'
             || $message === 'N;'
             || str_starts_with($message, 'a:2') === false
         ) {
