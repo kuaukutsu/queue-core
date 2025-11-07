@@ -11,7 +11,7 @@ use InvalidArgumentException;
  */
 final readonly class QueueMessage
 {
-    public function __construct(
+    private function __construct(
         public QueueTask $task,
         public QueueContext $context,
     ) {
@@ -50,19 +50,26 @@ final readonly class QueueMessage
      */
     public static function makeFromMessage(string $message): self
     {
+        if ($message === 'b:0;'
+            || $message === 'N;'
+            || str_starts_with($message, 'a:2') === false
+        ) {
+            throw new InvalidArgumentException(
+                'Message must contain an array of two elements: QueueTask and QueueContext.'
+            );
+        }
+
         if (extension_loaded('igbinary')) {
             $container = igbinary_unserialize($message);
         } else {
-            if (str_starts_with($message, 'a:2') === false) {
-                throw new InvalidArgumentException(
-                    'Message must contain an array of two elements: QueueTask and QueueContext.'
-                );
-            }
-
             $container = unserialize(
                 $message,
                 [
-                    'allowed_classes' => true,
+                    'allowed_classes' => [
+                        QueueTask::class,
+                        QueueContext::class,
+                    ],
+
                 ]
             );
         }
