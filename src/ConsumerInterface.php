@@ -16,5 +16,5 @@ interface ConsumerInterface
      * @param ?callable(string|null, Throwable): void $catch
      * @throws QueueConsumeException
      */
-    public function consume(SchemaInterface $schema, ?callable $catch = null): void;
+    public function consume(?callable $catch = null): void;
 }

@@ -15,5 +15,5 @@ interface BuilderInterface
 
     public function buildPublisher(): PublisherInterface;
 
-    public function buildConsumer(): ConsumerInterface;
+    public function buildConsumer(SchemaInterface $schema): ConsumerInterface;
 }
