@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace kuaukutsu\queue\core;
 
+use Closure;
 use Throwable;
 use kuaukutsu\queue\core\interceptor\InterceptorInterface;
 
@@ -13,9 +14,9 @@ use kuaukutsu\queue\core\interceptor\InterceptorInterface;
 interface BuilderInterface
 {
     /**
-     * @param callable(string|null, Throwable):void $catch
+     * @param Closure(string|null, Throwable):void $catch
      */
-    public function withCatch(callable $catch): self;
+    public function withCatch(Closure $catch): self;
 
     public function withInterceptors(InterceptorInterface ...$interceptor): self;
 
