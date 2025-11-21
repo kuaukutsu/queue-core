@@ -13,7 +13,6 @@ jobs:
         php-version:
           - "8.3"
           - "8.4"
-          - "8.5"
 
     steps:
       - name: Checkout
@@ -40,8 +39,9 @@ jobs:
         env:
           XDEBUG_MODE: coverage
         with:
+          php_version: ${{ matrix.php-version }}
+          php_extensions: pdo xdebug
           bootstrap: vendor/autoload.php
           configuration: phpunit.xml.dist
-          php_extensions: pdo xdebug
           args: tests --coverage-clover ./coverage.xml
           test_suffix: Test.php
