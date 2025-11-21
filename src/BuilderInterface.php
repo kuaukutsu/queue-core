@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace kuaukutsu\queue\core;
 
+use Throwable;
 use kuaukutsu\queue\core\interceptor\InterceptorInterface;
 
 /**
@@ -11,9 +12,14 @@ use kuaukutsu\queue\core\interceptor\InterceptorInterface;
  */
 interface BuilderInterface
 {
+    /**
+     * @param callable(string|null, Throwable):void $catch
+     */
+    public function withCatch(callable $catch): self;
+
     public function withInterceptors(InterceptorInterface ...$interceptor): self;
 
     public function buildPublisher(): PublisherInterface;
 
-    public function buildConsumer(SchemaInterface $schema): ConsumerInterface;
+    public function buildConsumer(): ConsumerInterface;
 }
