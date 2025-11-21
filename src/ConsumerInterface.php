@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace kuaukutsu\queue\core;
 
-use Throwable;
 use kuaukutsu\queue\core\exception\QueueConsumeException;
 
 /**
@@ -13,8 +12,10 @@ use kuaukutsu\queue\core\exception\QueueConsumeException;
 interface ConsumerInterface
 {
     /**
-     * @param ?callable(string|null, Throwable): void $catch
+     * @note is a blocking command.
      * @throws QueueConsumeException
      */
-    public function consume(?callable $catch = null): void;
+    public function consume(SchemaInterface $schema): void;
+
+    public function disconnect(): void;
 }
