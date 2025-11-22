@@ -92,6 +92,6 @@ final readonly class QueueMessage
      */
     public function getIdempotencyKey(): string
     {
-        return sprintf('%d:%s', $this->context->attempt, $this->task->getUuid());
+        return sprintf('%d.%s', $this->context->attempt, $this->task->getUuid());
     }
 }
