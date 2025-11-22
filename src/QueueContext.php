@@ -69,6 +69,9 @@ final readonly class QueueContext implements Serializable
         );
     }
 
+    /**
+     * @param positive-int|null $attempt
+     */
     public function incrAttempt(?int $attempt = null): self
     {
         return new self(
