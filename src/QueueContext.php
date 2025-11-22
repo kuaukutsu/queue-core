@@ -33,7 +33,7 @@ final readonly class QueueContext implements Serializable
     public static function make(SchemaInterface $schema): self
     {
         return new self(
-            attempt: 0,
+            attempt: 1,
             timeout: 0,
             routingKey: $schema->getRoutingKey(),
             createdAt: gmdate('c'),
@@ -69,10 +69,13 @@ final readonly class QueueContext implements Serializable
         );
     }
 
-    public function incrAttempt(): self
+    /**
+     * @param positive-int|null $attempt
+     */
+    public function incrAttempt(?int $attempt = null): self
     {
         return new self(
-            attempt: $this->attempt + 1,
+            attempt: $attempt ?? $this->attempt + 1,
             timeout: $this->timeout,
             routingKey: $this->routingKey,
             createdAt: $this->createdAt,

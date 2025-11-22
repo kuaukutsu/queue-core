@@ -85,4 +85,13 @@ final readonly class QueueMessage
 
         throw new InvalidArgumentException('Message must contain QueueTask and QueueContext.');
     }
+
+    /**
+     * @api
+     * @return non-empty-string
+     */
+    public function getIdempotencyKey(): string
+    {
+        return sprintf('%d:%s', $this->context->attempt, $this->task->getUuid());
+    }
 }
