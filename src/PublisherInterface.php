@@ -12,14 +12,15 @@ use kuaukutsu\queue\core\exception\QueuePublishException;
 interface PublisherInterface
 {
     /**
+     * @return non-empty-string
      * @throws QueuePublishException
      */
     public function push(SchemaInterface $schema, QueueTask $task, ?QueueContext $context = null): string;
 
     /**
-     * @param list<QueueTask> $taskBatch
+     * @param iterable<QueueTask> $taskBatch
      * @return list<non-empty-string>
      * @throws QueuePublishException
      */
-    public function pushBatch(SchemaInterface $schema, array $taskBatch, ?QueueContext $context = null): array;
+    public function pushBatch(SchemaInterface $schema, iterable $taskBatch, ?QueueContext $context = null): array;
 }
