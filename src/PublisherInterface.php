@@ -22,5 +22,5 @@ interface PublisherInterface
      * @return list<non-empty-string>
      * @throws QueuePublishException
      */
-    public function pushBatch(SchemaInterface $schema, array $taskBatch, ?QueueContext $context = null): array;
+    public function pushBatch(SchemaInterface $schema, iterable $taskBatch, ?QueueContext $context = null): array;
 }
