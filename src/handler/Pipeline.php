@@ -34,11 +34,15 @@ final class Pipeline implements HandlerInterface
     }
 
     #[Override]
-    public function withInterceptors(InterceptorInterface ...$interceptors): self
+    public function withInterceptors(InterceptorInterface | string ...$interceptors): self
     {
         $clone = clone $this;
         $clone->interceptors = [];
         foreach ($interceptors as $interceptor) {
+            if (is_string($interceptor)) {
+                $interceptor = $this->factory->make($interceptor);
+            }
+
             $clone->interceptors[] = $interceptor;
         }
 
@@ -67,7 +71,7 @@ final class Pipeline implements HandlerInterface
                 $task->arguments,
             );
         } catch (Throwable $exception) {
-            throw new FactoryException('Target must implement the QueueHandlerInterface.', $exception);
+            throw new FactoryException('Target must implement the TaskInterface.', $exception);
         }
 
         if ($handler instanceof TaskInterface) {
@@ -75,7 +79,7 @@ final class Pipeline implements HandlerInterface
         }
 
         /** @phpstan-ignore deadCode.unreachable */
-        throw new FactoryException('Target must implement the QueueHandlerInterface.');
+        throw new FactoryException('Target must implement the TaskInterface.');
     }
 
     private function next(): self

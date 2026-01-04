@@ -6,6 +6,7 @@ namespace kuaukutsu\queue\core;
 
 use Closure;
 use Throwable;
+use Psr\Container\ContainerExceptionInterface;
 use kuaukutsu\queue\core\interceptor\InterceptorInterface;
 
 /**
@@ -18,7 +19,12 @@ interface BuilderInterface
      */
     public function withCatch(Closure $catch): self;
 
-    public function withInterceptors(InterceptorInterface ...$interceptor): self;
+    /**
+     * @param InterceptorInterface|class-string<InterceptorInterface> ...$interceptors
+     * @throws ContainerExceptionInterface
+     * @noinspection PhpDocSignatureInspection
+     */
+    public function withInterceptors(InterceptorInterface | string ...$interceptors): self;
 
     public function buildPublisher(): PublisherInterface;
 
