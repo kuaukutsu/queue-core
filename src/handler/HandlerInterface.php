@@ -11,7 +11,12 @@ use kuaukutsu\queue\core\interceptor\InterceptorInterface;
 
 interface HandlerInterface
 {
-    public function withInterceptors(InterceptorInterface ...$interceptors): self;
+    /**
+     * @param InterceptorInterface|class-string<InterceptorInterface> ...$interceptors
+     * @throws ContainerExceptionInterface
+     * @noinspection PhpDocSignatureInspection
+     */
+    public function withInterceptors(InterceptorInterface | string ...$interceptors): self;
 
     /**
      * @throws ContainerExceptionInterface
